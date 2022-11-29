@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Swal from 'sweetalert2';
+import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
   const id = selectedEmployee.id;
@@ -10,14 +10,14 @@ const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
   const [salary, setSalary] = useState(selectedEmployee.salary);
   const [date, setDate] = useState(selectedEmployee.date);
 
-  const handleUpdate = e => {
+  const handleUpdate = (e) => {
     e.preventDefault();
 
     if (!firstName || !lastName || !email || !salary || !date) {
       return Swal.fire({
-        icon: 'error',
-        title: 'Error!',
-        text: 'All fields are required.',
+        icon: "error",
+        title: "Error!",
+        text: "All fields are required.",
         showConfirmButton: true,
       });
     }
@@ -38,13 +38,13 @@ const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
       }
     }
 
-    localStorage.setItem('employees_data', JSON.stringify(employees));
+    localStorage.setItem("employees_data", JSON.stringify(employees));
     setEmployees(employees);
     setIsEditing(false);
 
     Swal.fire({
-      icon: 'success',
-      title: 'Updated!',
+      icon: "success",
+      title: "Updated!",
       text: `${employee.firstName} ${employee.lastName}'s data has been updated.`,
       showConfirmButton: false,
       timer: 1500,
@@ -52,54 +52,69 @@ const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
   };
 
   return (
-    <div className="small-container">
+    <div className="container">
       <form onSubmit={handleUpdate}>
         <h1>Edit Employee</h1>
-        <label htmlFor="firstName">First Name</label>
-        <input
-          id="firstName"
-          type="text"
-          name="firstName"
-          value={firstName}
-          onChange={e => setFirstName(e.target.value)}
-        />
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          id="lastName"
-          type="text"
-          name="lastName"
-          value={lastName}
-          onChange={e => setLastName(e.target.value)}
-        />
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-        <label htmlFor="salary">Salary ($)</label>
-        <input
-          id="salary"
-          type="number"
-          name="salary"
-          value={salary}
-          onChange={e => setSalary(e.target.value)}
-        />
-        <label htmlFor="date">Date</label>
-        <input
-          id="date"
-          type="date"
-          name="date"
-          value={date}
-          onChange={e => setDate(e.target.value)}
-        />
-        <div style={{ marginTop: '30px' }}>
-          <input type="submit" value="Update" />
+        <div className="form-group">
+          <label htmlFor="firstName">First Name</label>
           <input
-            style={{ marginLeft: '12px' }}
-            className="muted-button"
+            id="firstName"
+            type="text"
+            name="firstName"
+            value={firstName}
+            className="form-control"
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            id="lastName"
+            type="text"
+            name="lastName"
+            value={lastName}
+            className="form-control"
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            value={email}
+            className="form-control"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="salary">Salary ($)</label>
+          <input
+            id="salary"
+            type="number"
+            name="salary"
+            value={salary}
+            className="form-control"
+            onChange={(e) => setSalary(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="date">Date</label>
+          <input
+            id="date"
+            type="date"
+            name="date"
+            value={date}
+            className="form-control"
+            onChange={(e) => setDate(e.target.value)}
+          />
+        </div>
+        <div style={{ marginTop: "30px" }}>
+          <input type="submit" value="Update" className="btn btn-success" />
+          <input
+            style={{ marginLeft: "12px" }}
+            className="btn btn-secondary"
             type="button"
             value="Cancel"
             onClick={() => setIsEditing(false)}
